@@ -1,0 +1,898 @@
+﻿@using test.Data;
+@using test.Controllers;
+@using test.Models;
+
+@{//@model IEnumerable<test.Models.Action>
+    //@model PagedList.IPagedList<test.Models.Action>
+}
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Index";    
+}
+
+
+<div class="preloader">
+
+    <div class="circ">
+        <div class="load">Loading . . . </div>
+        <div class="hands"></div>
+        <div class="body"></div>
+        <div class="head">
+            <div class="eye"></div>
+        </div>
+    </div>
+    
+
+</div>
+@{//<div id="message"><a href="#top" style="margin-top: 10px; padding-top: 5px;">Наверх</a></div>
+}
+</div>
+
+<a href="#" id="toTop">Наверх</a>
+<form asp-controller="Action" asp-action="Index" method="get" DefaultButton="ApplyTextSearchButton" onsubmit="return errorFilters();" >
+
+    <div class="mystylesearch" style="margin-top: 20px;">
+        <div style="margin-top: 1px;">
+        <div class="mydatainput">
+         
+            <label class="pageLabel" style="width: 8.8%"> Дата и время от:</label>
+            <input type="datetime-local" id="startDate" class="myinputfield" name="startNumber" value="@ViewData["StartNumber"]"/>
+            <label class="pageLabel" style="width: 1.7%; margin-left: 0.40%; margin-right: 0.05%" >до:</label>
+            <input type="datetime-local" id="endDate" class="myinputfield" name="endNumber" value="@ViewData["EndNumber"]" />
+            <label class="pageLabel" style="margin-left: 2px; width: 9.2%">Параметр поиска:</label>
+            <select class="myselectfield" name="selectLabel" id="action" onchange="selLabelActionType();">
+                <option id = "op1" value=@ViewData["Select1"]>@ViewData["Select1"]</option>
+                <option id = "op2" value=@ViewData["Select2"]>@ViewData["Select2"]</option>
+                <option id = "op3" value=@ViewData["Select3"]>@ViewData["Select3"]</option>
+                <option id = "op4" value=@ViewData["Select4"]>@ViewData["Select4"]</option>
+                <option id = "op5" value=@ViewData["Select5"]>@ViewData["Select5"]</option>
+                <option id = "op6" value=@ViewData["Select6"]>@ViewData["Select6"]</option>
+            </select>
+            <label class="pageLabel" style="margin-left: 3px;">Включить фильтр по Action Type:</label>
+            <input style="width: 22px; height: 22px; vertical-align: middle; margin-bottom: 3.5px;" type="checkbox" id="checkBoxAction" name="check" value=@ViewData["checkBoxClicked"] onchange="checkBoxActionField();" />
+            <select class="myselectfield" name="actionType" id="actionType">
+                <option value=@ViewData["SelectAction1"]>@ViewData["SelectAction1"]</option>
+                <option value=@ViewData["SelectAction2"]>@ViewData["SelectAction2"]</option>
+                <option value=@ViewData["SelectAction3"]>@ViewData["SelectAction3"]</option>
+                <option value=@ViewData["SelectAction4"]>@ViewData["SelectAction4"]</option>
+                <option value=@ViewData["SelectAction5"]>@ViewData["SelectAction5"]</option>
+                <option value=@ViewData["SelectAction6"]>@ViewData["SelectAction6"]</option>
+                <option value=@ViewData["SelectAction7"]>@ViewData["SelectAction7"]</option>
+                <option value=@ViewData["SelectAction8"]>@ViewData["SelectAction8"]</option>
+                <option value=@ViewData["SelectAction9"]>@ViewData["SelectAction9"]</option>
+                <option value=@ViewData["SelectAction10"]>@ViewData["SelectAction10"]</option>
+                <option value=@ViewData["SelectAction11"]>@ViewData["SelectAction11"]</option>
+                <option value=@ViewData["SelectAction12"]>@ViewData["SelectAction12"]</option>
+                <option value=@ViewData["SelectAction13"]>@ViewData["SelectAction13"]</option>
+                <option value=@ViewData["SelectAction14"]>@ViewData["SelectAction14"]</option>
+                <option value=@ViewData["SelectAction15"]>@ViewData["SelectAction15"]</option>
+                <option value=@ViewData["SelectAction16"]>@ViewData["SelectAction16"]</option>
+                <option value=@ViewData["SelectAction17"]>@ViewData["SelectAction17"]</option>
+                <option value=@ViewData["SelectAction18"]>@ViewData["SelectAction18"]</option>
+                <option value=@ViewData["SelectAction19"]>@ViewData["SelectAction19"]</option>
+                <option value=@ViewData["SelectAction20"]>@ViewData["SelectAction20"]</option>
+                <option value=@ViewData["SelectAction21"]>@ViewData["SelectAction21"]</option>
+                <option value=@ViewData["SelectAction22"]>@ViewData["SelectAction22"]</option>
+                <option value=@ViewData["SelectAction23"]>@ViewData["SelectAction23"]</option>
+                <option value=@ViewData["SelectAction24"]>@ViewData["SelectAction24"]</option>
+                <option value=@ViewData["SelectAction25"]>@ViewData["SelectAction25"]</option>
+                <option value=@ViewData["SelectAction26"]>@ViewData["SelectAction26"]</option>
+                <option value=@ViewData["SelectAction27"]>@ViewData["SelectAction27"]</option>
+                <option value=@ViewData["SelectAction28"]>@ViewData["SelectAction28"]</option>
+                <option value=@ViewData["SelectAction29"]>@ViewData["SelectAction29"]</option>               
+            </select>
+            
+            <input class="myButtonClear" id="clearButton" type="button" value="Очистить" />
+         </div>
+     </div>
+    </div>
+     <div class="mystylesearch">
+         <div class="input-group mb-2">
+            <input type="search" class="myInputFieldSearch" placeholder="Введите запрос" id="action1" name="SearchString" value="@ViewData["Search"]"/>
+            <input class="myButtonSearch" id="ApplyTextSearchButton" type="submit" value="Поиск" onclick="searchClick" />
+         </div>
+    </div>
+    </form>
+    <div>
+        
+       
+        @{
+        //<a href="?startNumber=@ViewData["StartNumber"]%3A01&endNumber=@ViewData["EndNumber"]%3A03&selectLabel=SearchAll&SearchString=" title="Algorithm">1</a>
+            
+            if (Model.PageViewModel.TotalPages == 2)
+            {
+
+            <div class="blockPages">
+                <label class="pageLabel">Нумерация страниц:</label>
+                <a onclick="pageClick();" onclick="pageClick();" id="link1" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                       asp-route-endNumber=@ViewData["EndNumber"]
+                       asp-route-selectLabel=@ViewData["Select1"]
+                       asp-route-check=@ViewData["checkBoxClicked"]
+                       asp-route-actionType=@ViewData["SelectAction1"]
+                       asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="1">
+                    <input id="1" class="pageStyle" type="button" value="1" />
+                </a>
+                <a onclick="pageClick();" id="link2" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                       asp-route-endNumber=@ViewData["EndNumber"]
+                       asp-route-selectLabel=@ViewData["Select1"]
+                       asp-route-check=@ViewData["checkBoxClicked"]
+                       asp-route-actionType=@ViewData["SelectAction1"]
+                       asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="2">
+                    <input id="2" class="pageStyle" type="button" value="@Model.PageViewModel.TotalPages" />
+                </a>
+                @if (Model.PageViewModel.PageNumber != Model.PageViewModel.TotalPages) 
+                {
+                    <a onclick="pageClick();" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                       asp-route-endNumber=@ViewData["EndNumber"]
+                       asp-route-selectLabel=@ViewData["Select1"]
+                       asp-route-check=@ViewData["checkBoxClicked"]
+                       asp-route-actionType=@ViewData["SelectAction1"]
+                       asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)">
+                        <input class="styleNextButton" type="button" value="Следующая страница" />
+                    </a>
+                } 
+                </div>
+                
+            }
+            else if (Model.PageViewModel.TotalPages == 3)
+            {
+
+            <div class="blockPages">
+                <label class="pageLabel">Нумерация страниц:</label>
+                <a onclick="pageClick();" id="link1" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                       asp-route-endNumber=@ViewData["EndNumber"]
+                       asp-route-selectLabel=@ViewData["Select1"]
+                       asp-route-check=@ViewData["checkBoxClicked"]
+                       asp-route-actionType=@ViewData["SelectAction1"]
+                       asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="1">
+                    <input id="1" class="pageStyle" type="button" value="1" />
+                    </a>
+                <a onclick="pageClick();" id="link2" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+                   asp-route-page="2">
+                    <input id="2" class="pageStyle" type="button" value="2" />
+                    </a>
+                <a onclick="pageClick();" id="link3" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="3">
+                    <input id="3" class="pageStyle" type="button" value="3" />
+                    </a>
+                @if (Model.PageViewModel.PageNumber != Model.PageViewModel.TotalPages)
+                {
+                    <a onclick="pageClick();" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                       asp-route-endNumber=@ViewData["EndNumber"]
+                       asp-route-selectLabel=@ViewData["Select1"]
+                       asp-route-check=@ViewData["checkBoxClicked"]
+                       asp-route-actionType=@ViewData["SelectAction1"]
+                       asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)">
+                        <input class="styleNextButton" type="button" value="Следующая страница" />
+                    </a>
+                }
+            </div>
+                        
+            }
+            else if (Model.PageViewModel.TotalPages == 4)
+            {
+
+            <div class="blockPages">
+                <label class="pageLabel">Нумерация страниц:</label>
+                <a onclick="pageClick();" id="link1" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="1">
+                    <input id="1" class="pageStyle" type="button" value="1" />
+                </a>
+                <a onclick="pageClick();" id="link2" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="2">
+                    <input id="2" class="pageStyle" type="button" value="2" />
+                    </a>
+                <a onclick="pageClick();" id="link3" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+                   asp-route-page="3">
+                    <input id="3" class="pageStyle" type="button" value="3" />
+                    </a>
+                <a onclick="pageClick();" id="link4" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="4">
+                    <input id="4" class="pageStyle" type="button" value="4" />
+                    </a>
+                @if (Model.PageViewModel.PageNumber != Model.PageViewModel.TotalPages)
+                {
+                    <a onclick="pageClick();" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                       asp-route-endNumber=@ViewData["EndNumber"]
+                       asp-route-selectLabel=@ViewData["Select1"]
+                       asp-route-check=@ViewData["checkBoxClicked"]
+                       asp-route-actionType=@ViewData["SelectAction1"]
+                       asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)">
+                        <input class="styleNextButton" type="button" value="Следующая страница" />
+                    </a>
+                }
+            </div>
+                        
+            }
+            else if (Model.PageViewModel.TotalPages >= 5 && Model.PageViewModel.PageNumber >= Model.PageViewModel.TotalPages - 2)
+            {
+
+            <div class="blockPages">
+                <label class="pageLabel">Нумерация страниц:</label>
+                <a onclick="pageClick();" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                       asp-route-endNumber=@ViewData["EndNumber"]
+                       asp-route-selectLabel=@ViewData["Select1"]
+                       asp-route-check=@ViewData["checkBoxClicked"]
+                       asp-route-actionType=@ViewData["SelectAction1"]
+                       asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="1">
+                    <input class="styleStartButton" type="button" value="В начало" />
+                </a>
+                <a onclick="pageClick();" id="link1" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                       asp-route-endNumber=@ViewData["EndNumber"]
+                       asp-route-selectLabel=@ViewData["Select1"]
+                       asp-route-check=@ViewData["checkBoxClicked"]
+                       asp-route-actionType=@ViewData["SelectAction1"]
+                       asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.TotalPages - 4)">
+                    <input id="1" class="pageStyle" type="button" value="@(Model.PageViewModel.TotalPages - 4)" />
+                </a>
+                <a onclick="pageClick();" id="link2" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+                   asp-route-page="@(Model.PageViewModel.TotalPages - 3)">
+                    <input id="2" class="pageStyle" type="button" value="@(Model.PageViewModel.TotalPages - 3)" />
+                    </a>
+                <a onclick="pageClick();" id="link3" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.TotalPages - 2)">
+                    <input id="3" class="pageStyle" type="button" value="@(Model.PageViewModel.TotalPages - 2)" />
+                    </a>
+                <a onclick="pageClick();" id="link4" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+                   asp-route-page="@(Model.PageViewModel.TotalPages - 1)">
+                    <input id="4" class="pageStyle" type="button" value="@(Model.PageViewModel.TotalPages - 1)" />
+                    </a>
+                <a onclick="pageClick();" id="link5" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@Model.PageViewModel.TotalPages">
+                    <input id="5" class="pageStyle" type="button" value="@Model.PageViewModel.TotalPages" />
+                    </a>
+                @if (Model.PageViewModel.PageNumber != Model.PageViewModel.TotalPages)
+                {
+                    <a onclick="pageClick();" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                        asp-route-endNumber=@ViewData["EndNumber"]
+                        asp-route-selectLabel=@ViewData["Select1"]
+                        asp-route-check=@ViewData["checkBoxClicked"]
+                        asp-route-actionType=@ViewData["SelectAction1"]
+                        asp-route-SearchString=@ViewData["Search"]
+                        asp-route-page="@(Model.PageViewModel.PageNumber + 1)">
+                        <input class="styleNextButton" type="button" value="Следующая страница" />
+                    </a>
+                }
+                <label class="pageLabel">   Всего страниц: @Model.PageViewModel.TotalPages</label>
+            </div>
+
+        }
+        else if (Model.PageViewModel.TotalPages >= 5 && Model.PageViewModel.PageNumber >= 3)
+        {
+
+            <div class="blockPages">
+                <label class="pageLabel">Нумерация страниц:</label>
+                @if (Model.PageViewModel.PageNumber > 3) {
+                    <a onclick="pageClick();" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="1">
+                        <input class="styleStartButton" type="button" value="В начало" />
+                </a>
+                }
+                <a onclick="pageClick();" id="link1" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.PageNumber - 2)">
+                    <input id="1" class="pageStyle" type="button" value="@(Model.PageViewModel.PageNumber - 2)" />
+                </a>
+
+                <a onclick="pageClick();" id="link2" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.PageNumber - 1)">
+                    <input id="2" class="pageStyle" type="button" value="@(Model.PageViewModel.PageNumber - 1)" style="padding-left: 6px;" />
+                    </a>
+                <a onclick="pageClick();" id="link3" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@Model.PageViewModel.PageNumber" >
+                    <input id="3" class="pageStyle" type="button" value="@Model.PageViewModel.PageNumber" />
+                    </a>
+                <a onclick="pageClick();" id="link4" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)">
+                    <input id="4" class="pageStyle" type="button" value="@(Model.PageViewModel.PageNumber + 1)" />
+                    </a>
+
+                <a onclick="pageClick();" id="link5" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.PageNumber + 2)">
+                    <input id="5" class="pageStyle" type="button" value="@(Model.PageViewModel.PageNumber + 2)" />
+                    </a>
+                @if (Model.PageViewModel.PageNumber != Model.PageViewModel.TotalPages)
+                {
+                    <a onclick="pageClick();" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)">
+                        <input class="styleNextButton" type="button" value="Следующая страница" />
+                </a>
+                }
+                <label class="pageLabel">   Всего страниц: @Model.PageViewModel.TotalPages</label>
+                </div>
+                        
+            }
+            else if (Model.PageViewModel.TotalPages >= 5 && Model.PageViewModel.PageNumber < 3)
+            {
+
+            <div class="blockPages">
+                <label class="pageLabel">Нумерация страниц:</label>
+                <a onclick="pageClick();" id="link1" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="1">
+                    <input id="1" class="pageStyle" type="button" value="1" />
+                </a>
+                <a onclick="pageClick();" id="link2" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="2">
+                    <input id="2" class="pageStyle" type="button" value="2" />
+                </a>
+                <a onclick="pageClick();" id="link3" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="3">
+                    <input id="3" class="pageStyle" type="button" value="3"  />
+                </a>
+                <a onclick="pageClick();" id="link4" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="4" >
+                    <input id="4" class="pageStyle" type="button" value="4" />
+                </a>
+                <a onclick="pageClick();" id="link5" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="5" >
+                    <input id="5" class="pageStyle" type="button" value="5"  />
+                </a>
+                
+                <a onclick="pageClick();" class="pageNumber" asp-route-startNumber=@ViewData["StartNumber"]
+                   asp-route-endNumber=@ViewData["EndNumber"]
+                   asp-route-selectLabel=@ViewData["Select1"]
+                   asp-route-check=@ViewData["checkBoxClicked"]
+                   asp-route-actionType=@ViewData["SelectAction1"]
+                   asp-route-SearchString=@ViewData["Search"]
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)">
+                    <input class="styleNextButton" type="button" value="Следующая страница" />
+                </a>
+                <label class="pageLabel">   Всего страниц: @Model.PageViewModel.TotalPages</label>
+            </div>
+
+        }
+
+        
+        }
+        
+        
+        
+            
+                
+            
+        
+    </div>
+
+
+    
+
+
+<body >
+
+    <div class="popup" id="myPopupSearch" aria-hidden="true" onClick="if(event.target == this){closePopup1('#myPopupSearch');}">
+        <div class="wrapper" aria-labelledby="popupTitle" aria-describedby="popupText" aria-modal="true">
+            <h3 id="popupTitle">Неправильно выбраны фильтры:</h3>
+            <label id="popupText1" style="margin-top: 10px; margin-bottom: 10px; font-family: Trebuchet MS; font-size: 22px;">Невозможно искать по @ViewData["Error"] с пустым полем ввода поиска, заполните поле ввода.</label>
+            <button class="modalWindowButton" id="closePopup" onClick="closePopup1('#myPopupSearch');" aria-label="Close popup">Закрыть</button>
+        </div>
+    </div>
+
+
+    <div class="popup" id="myPopupActionType" aria-hidden="true" onClick="if(event.target == this){closePopup2('#myPopupActionType');}">
+        <div class="wrapper" aria-labelledby="popupTitle" aria-describedby="popupText" aria-modal="true">
+            <div><h3 id="popupTitle">Ошибка:</h3>
+                <label id="popupText2" style="margin-top: 10px; margin-bottom: 10px; font-family: Trebuchet MS; font-size: 22px;"></label>
+            </div>
+            <button  class="modalWindowButton" id="closePopup" onClick="closePopup2('#myPopupActionType');" aria-label="Close popup">Закрыть</button>
+        </div>
+        
+    </div>
+
+    @{
+        int count = 0;
+        List<List<string>> finalList = new List<List<string>>();
+        if ((List<List<string>>)ViewData["ExtraInformationList"] != null)
+        {
+            finalList.AddRange((List<List<string>>)ViewData["ExtraInformationList"]);
+        }
+        /*List<string> strings = new List<string>();
+        int count = 0;
+        IEnumerable<test.Models.Action> actionsTest = (IEnumerable<test.Models.Action>)ViewData["actions"];
+        if ((List<string>)ViewData["ExtraInformationList"] != null)
+        {
+            strings.AddRange((List<string>)ViewData["ExtraInformationList"]);
+        }
+        strings = (List<string>)ViewData["ExtraInformationList"];*/
+        if (ViewData["Information"] != null)
+        {
+            <div class="information_block">
+                <label style="font-size: 25px; font-family: Trebuchet MS; margin-top: 240px;">@ViewData["Information"]</label>
+            </div>
+        }
+        else
+            if (!Model.Actions.Any())
+        {
+            <div class="notfound_block" style="margin-top: 250px;">
+                <label>Ничего не найдено...</label>
+            </div>
+        } else 
+        {
+            count = (Model.PageViewModel.PageNumber - 1) * 15;
+            <div style="font-family: Courier New, Courier, monospace; font-size: 15px">
+            <table style="width: 98%; table-layout: fixed; margin-top: 15px; border: 1px solid black; border-collapse: collapse; margin-bottom: 90px; margin-left:1%; margin-right: 1%">
+                    <thead style="background: #efefef; border: 1px solid #000000; position: sticky; top: -1px; z-index: 2">
+                        <tr>
+                        <th style="overflow: hidden; word-wrap: break-word; width: 14%; border: 1px solid black; padding-left: 5px;">UserLogin</th>
+                        <th style="overflow: hidden; word-wrap: break-word; width: 15%; border: 1px solid black; padding-left: 5px;">Application</th>
+                        <th style="overflow: hidden; word-wrap: break-word; width: 13%; border: 1px solid black; padding-left: 5px;">Date Time</th>
+                        <th style="overflow: hidden; word-wrap: break-word; width: 14%; border: 1px solid black; padding-left: 5px;">ActionType</th>
+                        <th style="overflow: hidden; word-wrap: break-word; width: 14%; border: 1px solid black; padding-left: 5px;">ActionObjectID</th>
+                        <th style="overflow: hidden; word-wrap: break-word; width: 28%; border: 1px solid black; padding-left: 5px;">ExtraInformation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        
+                        @foreach (var item in Model.Actions)
+                        {
+                            
+                            <tr>
+                                    <td style="overflow: hidden; word-wrap: break-word; width: 14%; border: 1px solid #2F4F4F; padding-left: 5px; padding-right: 5px; vertical-align: top"><b>@item.UserLogin</b></td>
+                                    <td style="overflow: hidden; word-wrap: break-word; width: 15%; border: 1px solid #2F4F4F; padding-left: 5px; padding-right: 5px; vertical-align: top"><b>@item.Application</b></td>
+                                    <td style="overflow: hidden; word-wrap: break-word; width: 13%; border: 1px solid #2F4F4F; padding-left: 5px; padding-right: 5px; vertical-align: top"><b>@item.Date_Time</b></td>
+                                    <td style="overflow: hidden; word-wrap: break-word; width: 14%; border: 1px solid #2F4F4F; padding-left: 5px; padding-right: 5px; vertical-align: top"><b>@item.ActionType</b></td>
+                                    <td style="overflow: hidden; word-wrap: break-word; width: 14%; border: 1px solid #2F4F4F; padding-left: 5px; padding-right: 5px; vertical-align: top"><b>@item.ActionObjectID</b></td>
+                                    <td style="border-collapse: collapse; overflow: hidden;  width: 28%; border: 1px solid #2F4F4F; padding-left: 5px; padding-right: 5px; vertical-align: top">
+                                        @{
+                                            for(int i = 0; i < finalList[count].Count(); i++)
+                                            {
+                                                if (i % 2 == 0)
+                                                {
+                                                    @finalList[count][i]
+                                                }
+                                                if (i % 2 == 1)
+                                                {
+                                                    <b>@finalList[count][i]</b><br>  
+                                                }
+                                             
+                                            }
+                            }</td>
+                            </tr>
+                            count++;
+                        }
+                            //strings.Clear();
+                            finalList.Clear();
+                    }  
+                    </tbody>
+                </table>
+               
+
+                
+            </div>         
+        }
+        
+    }
+    
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="js/main.js"></script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"77f86c06c9141e85","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.11.3","si":100}' crossorigin="anonymous"></script>
+    <script>
+        function myFunction(chosen) {
+            console.log(chosen);
+        }
+
+
+        
+    </script>
+    <script>
+        window.addEventListener('load', () => {
+            /* Страница загружена, включая все ресурсы */
+            const preloader = document.querySelector('.preloader') /* находим блок Preloader */
+            preloader.classList.add('preloader_hidden') /* добавляем ему класс для скрытия */
+
+            if (document.getElementById("1").value == @Model.PageViewModel.PageNumber) {
+                document.getElementById("1").style.backgroundColor = "#32CD32";
+                document.getElementById("link1").classList.add('disableLink');
+            }
+            else if (document.getElementById("2").value == @Model.PageViewModel.PageNumber) {
+                document.getElementById("2").style.backgroundColor = "#32CD32";
+                document.getElementById("link2").classList.add('disableLink');
+            }
+            else if (document.getElementById("3").value == @Model.PageViewModel.PageNumber) {
+                document.getElementById("3").style.backgroundColor = "#32CD32";
+                document.getElementById("link3").classList.add('disableLink');
+            }
+            else if (document.getElementById("4").value == @Model.PageViewModel.PageNumber) {
+                document.getElementById("4").style.backgroundColor = "#32CD32";
+                document.getElementById("link4").classList.add('disableLink');
+            }
+            else if (document.getElementById("5").value == @Model.PageViewModel.PageNumber) {
+                document.getElementById("5").style.backgroundColor = "#32CD32";
+                document.getElementById("link5").classList.add('disableLink');
+            }
+        })
+
+
+        window.addEventListener('load', () => {
+            if (document.getElementById("checkBoxAction").value == "on") {
+                document.getElementById("checkBoxAction").checked = true;
+                document.getElementById("actionType").disabled = false;
+            }
+            else {
+                document.getElementById("actionType").disabled = true;
+            }
+
+            if (checkBoxAction.checked) {
+                document.getElementById("checkBoxAction").value = "on";
+                document.getElementById("actionType").disabled = false;
+                if (document.getElementById("action").value == "ActionType") {
+                    document.getElementById("action").value = "SearchAll";
+
+                }
+
+                var tempString = "";
+                for (var i = 1; i <= 6; i++) {
+                    tempString = "op" + i;
+                    if (document.getElementById(tempString).value == "ActionType") {
+                        document.getElementById(tempString).disabled = true;
+                    }
+                }
+
+            }
+            else {
+                document.getElementById("checkBoxAction").value = "off";
+                document.getElementById("actionType").disabled = true;
+                var tempString = "";
+                for (var i = 1; i <= 6; i++) {
+                    tempString = "op" + i;
+                    if (document.getElementById(tempString).value == "ActionType") {
+                        document.getElementById(tempString).disabled = false;
+                    }
+                }
+
+            }
+        })
+    </script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            /* set variables locally for increased performance */
+            var scroll_timer;
+            var displayed = false;
+            var $message = $('#message a');
+            var $window = $(window);
+            var top = $(document.body).children(0).position().top;
+            /* react to scroll event on window */
+            $window.scroll(function () {
+                window.clearTimeout(scroll_timer);
+                scroll_timer = window.setTimeout(function () {
+                    if ($window.scrollTop() <= top) {
+                        displayed = false;
+                        $message.fadeOut(500);
+                    }
+                    else if (displayed == false) {
+                        displayed = true;
+                        $message.stop(true, true).show().click(function () { $message.fadeOut(500); });
+                    }
+                }, 100);
+            });
+        });
+    </script>
+
+    <script>
+
+        function searchClick() {
+
+            const preloader = document.querySelector('.preloader') /* находим блок Preloader */
+            preloader.classList.remove('preloader_hidden') /* добавляем ему класс для скрытия */
+            preloader.classList.add('preloader_visible');
+
+        }
+
+        function pageClick() {
+            const preloader = document.querySelector('.preloader') /* находим блок Preloader */
+            preloader.classList.remove('preloader_hidden') /* добавляем ему класс для скрытия */
+            preloader.classList.add('preloader_visible');
+        }
+
+
+
+
+
+
+        function errorFilters() {
+
+            var selectLabel = document.getElementById("action").value;
+            var selectAction = document.getElementById("actionType").value;
+            var search = document.getElementById("action1").value;
+            var startDate = document.getElementById("startDate").value;
+            var endDate = document.getElementById("endDate").value;
+
+
+            if (startDate == "" && endDate == "") {
+                if (selectLabel != "ActionType") {
+                    document.getElementById("startDate").classList.add("empty_field");
+                    document.getElementById("endDate").classList.add("empty_field");
+                    document.getElementById("action1").classList.remove("empty_field");
+                    document.getElementById("action").classList.remove("empty_field");
+                    openPopup2('#myPopupActionType');
+                    return false;
+                }
+            }
+            else if (search == "" && selectLabel != "SearchAll" && startDate != "" && endDate != "") {
+                if (selectLabel != "ActionType") {
+                    document.getElementById("action1").classList.add("empty_field");
+                    document.getElementById("action").classList.add("empty_field");
+                    document.getElementById("startDate").classList.remove("empty_field");
+                    document.getElementById("endDate").classList.remove("empty_field");
+                    openPopup1('#myPopupSearch');
+                    var errorSearchString = 'Невозможно искать по ' + selectLabel + ' с пустым полем ввода поиска, заполните поле ввода.';
+                    document.getElementById("popupText1").textContent = errorSearchString;
+                    return false;
+                }
+            }
+            else {
+                document.getElementById("action").classList.remove("empty_field");
+                document.getElementById("actionType").classList.remove("empty_field");
+                document.getElementById("action1").classList.remove("empty_field");
+                document.getElementById("startDate").classList.remove("empty_field");
+                document.getElementById("endDate").classList.remove("empty_field");
+                const preloader = document.querySelector('.preloader') /* находим блок Preloader */
+                preloader.classList.remove('preloader_hidden') /* добавляем ему класс для скрытия */
+                preloader.classList.add('preloader_visible');
+            }
+
+
+
+
+        }
+
+        function openPopup1(popup) {
+            $(popup).show().attr("aria-hidden", "false");
+            var selectLabel = document.getElementById("action").value;
+            var errorSearchString = 'Невозможно искать по ' + selectLabel + ' с пустым полем ввода поиска, заполните поле ввода.';
+            document.getElementById("popupText1").innerText = errorSearchString;
+            $("#closePopup1").focus();
+        }
+
+        function openPopup2(popup) {
+            $(popup).show().attr("aria-hidden", "false");
+            var errorActionTypeString = 'Введите дату и время.';
+            document.getElementById("popupText2").innerText = errorActionTypeString;
+            $("#closePopup2").focus();
+        }
+
+        function closePopup1(popup) {
+
+            $(popup).hide().attr("aria-hidden", "true");
+
+            $("#openMyPopupSearch").focus();
+        }
+
+        function closePopup2(popup) {
+
+            $(popup).hide().attr("aria-hidden", "true");
+
+            $("#openMyPopupActionType").focus();
+        }
+    </script>
+    <script>
+        function checkBoxActionField() {
+            if (checkBoxAction.checked){
+                document.getElementById("checkBoxAction").value = "on";
+                document.getElementById("actionType").disabled = false;
+                if (document.getElementById("action").value == "ActionType") {
+                    document.getElementById("action").value = "SearchAll";
+                                      
+                }
+                                  
+                var tempString = "";
+                for (var i = 1; i <= 6; i++) {
+                    tempString = "op" + i;
+                    if (document.getElementById(tempString).value == "ActionType") {
+                        document.getElementById(tempString).disabled = true;
+                    }
+                }
+                
+            }
+            else {
+                document.getElementById("checkBoxAction").value = "off";
+                document.getElementById("actionType").disabled = true;
+                var tempString = "";
+                for (var i = 1; i <= 6; i++) {
+                    tempString = "op" + i;
+                    if (document.getElementById(tempString).value == "ActionType") {
+                        document.getElementById(tempString).disabled = false;
+                    }
+                }
+                
+            }
+        }
+
+
+    </script>
+    <script>
+        document.getElementById("clearButton").onclick = function(e) {
+            document.getElementById("action1").value = "";
+            document.getElementById("startDate").value = "";
+            document.getElementById("endDate").value = "";
+            document.getElementById("actionType").value = "User_Login";
+            document.getElementById("action").value = "SearchAll";
+            document.getElementById("action").classList.remove("empty_field");
+            document.getElementById("actionType").classList.remove("empty_field");
+            document.getElementById("action1").classList.remove("empty_field");
+            document.getElementById("checkBoxAction").checked = false;
+        }
+
+
+        function scrollTo(to, duration = 700) {
+            const
+            element = document.scrollingElement || document.documentElement,
+            start = element.scrollTop,
+            change = to - start,
+            startDate = +new Date(),
+            // t = current time
+            // b = start value
+            // c = change in value
+            // d = duration
+            easeInOutQuad = function (t, b, c, d) {
+                t /= d / 2;
+                if (t < 1) return c / 2 * t * t + b;
+                t--;
+                return -c / 2 * (t * (t - 2) - 1) + b;
+            },
+            animateScroll = function () {
+                const currentDate = +new Date();
+                const currentTime = currentDate - startDate;
+                element.scrollTop = parseInt(easeInOutQuad(currentTime, start, change, duration));
+                if (currentTime < duration) {
+                    requestAnimationFrame(animateScroll);
+                }
+                else {
+                    element.scrollTop = to;
+                    }
+                };
+            animateScroll();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+        let btn = document.querySelector('#toTop');
+        window.addEventListener('scroll', function () {
+        // Если прокрутили дальше 599px, показываем кнопку
+        if (pageYOffset > 100) {
+            btn.classList.add('show');
+            // Иначе прячем
+        } else {
+            btn.classList.remove('show');
+        }
+    });
+
+    // При клике прокручиываем на самый верх
+    btn.onclick = function (click) {
+        click.preventDefault();
+        scrollTo(0, 400);
+        }
+    });
+    </script>
+
+    </body>
+    
+
+    
+
+

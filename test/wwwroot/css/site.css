@@ -1,0 +1,735 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+      font-size: 16px;
+  }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    min-width: 1903px;
+    margin-bottom: 60px;
+    background-color: white;
+}
+
+.form__group {
+    margin-bottom: 15px;
+    margin-top: 20px;
+    margin-left: 284px;
+    
+    
+}
+
+.myform {
+    width: 100%;
+    padding: 20px;
+    font-family: sans-serif;
+    font-weight:400;
+    font-size: 40px;
+    border-top-style: solid;
+    background-color: #32CD32;
+    height: 100px;
+    
+}
+
+.footer__string {
+    justify-content: center;
+    align-items: center;
+    font-family: Trebuchet MS;
+    font-size: 24px;
+    color: black;
+    margin-top: 20px;
+}
+
+.mycustom {
+    border: solid 1px green;
+    position: relative;
+}
+
+.mycustom input[type=text] {
+    border: none;
+    width: 100%;
+    padding-right: 123px;
+}
+
+.mycustom .input-group-prepend {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;
+    z-index: 9;
+}
+
+.mainblock {
+    width: 100%;
+    background-color: white;
+    border-top-style: solid;
+    font-family: 'MS Reference Sans Serif';
+}
+
+.myfooter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #32CD32;
+    border-top-style: solid;
+    font-family: Trebuchet MS;
+}
+
+.mydatainput {
+    font-size: 20px;
+    font-family: Trebuchet MS;
+}
+
+.myinputfield {
+    margin-right: 0px;
+    margin-bottom: 2px;
+    margin-left: 0px;
+    height: 39px;
+    width: 11.38%;
+    border-radius: 4px;
+    border: 1px solid #bdbdbd;
+    padding-top: 1px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+}
+
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+.myselectfield {
+    margin-right: 0.0%;
+    height: 39px;
+    border-radius: 4px;
+    border: 1px solid #bdbdbd;
+    padding-bottom: 0px;
+    width: 14%;
+}
+
+.myButtonClear {
+    font-size: 20px;
+    font-family: Trebuchet MS;
+    height: 39px;
+    padding-top: 2px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid firebrick;
+    background-color: firebrick;
+    color: white;
+    width: 7%;
+    margin-left: 11.5px;
+}
+
+
+.myInputFieldSearch {
+    margin-top: 2px;
+    margin-right: 0px;
+    padding-left: 5px;
+    padding-bottom: 2px;
+    font-size: 20px;
+    font-family: Trebuchet MS;
+    height: 38px;
+    border-radius: 4px;
+    border: 1px solid #bdbdbd;
+    width: 93%;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    background-color: white;
+}
+
+.myButtonSearch {
+    margin-top: 2px;
+    font-size: 20px;
+    font-family: Trebuchet MS;
+    height: 38px;
+    padding-top: 2px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid GREEN;
+    background-color: GREEN;
+    margin-left: 0px;
+    color: white;
+    width: 7%
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.mycheckbox {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    position: relative;
+    top: -2px;
+}
+
+.mylist {
+    margin-top: 10px;
+    background-color: #F0F8FF;
+    margin-left: 275px;
+    margin-right: 275px;
+    border-radius: 20px;
+    margin-bottom: 95px;
+}
+
+.mystylesearch {
+    margin-top: 10px;
+    background-color: #F0F8FF;
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 90px;
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 20px;
+    
+}
+
+.information_block {
+    margin-top: 25px;
+    background-color: white;
+    margin-left: 30%;
+    margin-right: 30.5%;
+    height: 50px;
+    padding-top: 9px;
+    padding-left: 117px;
+    padding-right: 25px;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+
+.notfound_block {
+    font-size: 25px;
+    font-family: Trebuchet MS;
+    margin-top: 25px;
+    background-color: white;
+    margin-left: 31%;
+    margin-right: 30.5%;
+    height: 50px;
+    padding-top: 9px;
+    padding-left: 240px;
+    padding-right: 25px;
+    border-radius: 20px;
+   
+}
+
+.error_block {
+    margin-top: 25px;
+    background-color: white;
+    margin-left: 30.5%;
+    margin-right: 30.5%;
+    height: 50px;
+    padding-top: 9px;
+    padding-left: 117px;
+    padding-right: 25px;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+
+/*.preloader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-color: #21D4FD;
+    background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+    z-index: 1001;
+    color: #eee;
+}
+
+.preloader__loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes preloader-rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loaded_hiding .preloader  {
+    transition: 0.3s opacity;
+    opacity: 0;
+}
+
+.loaded .preloader {
+    display: none;
+}*/
+
+.preloader {
+    /* Фиксируем блок на всю ширину и высоту окна, чтобы перекрывать все остальные элементы */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    /* Центрируем анимацию Preloader */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* При загрузке страницы, Preloader сразу отображается */
+    opacity: 1;
+    visibility: visible;
+    /* Добавляем затемнение */
+    background: rgba(18,18,18,0.64);
+    /* Добавляем плавный переход */
+    transition: opacity 1s, visibility 0s 0s;
+}
+
+.preloader_hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 1s, visibility 0s 1s;
+}
+
+.preloader_visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s, visibility 0s 0s;
+}
+
+
+@import "https://fonts.googleapis.com/css?family=Julius+Sans+One";
+
+
+
+.eye {
+    width: 20px;
+    height: 8px;
+    background-color: #f0dcdc;
+    border-radius: 0 0 20px 20px;
+    position: relative;
+    left: 10px;
+    top: 40px;
+    box-shadow: 40px 0 0 0 #f0dcdc
+}
+
+.head {
+    -webkit-backface-visibility: hidden;
+    position: relative;
+    margin: -250px auto;
+    width: 80px;
+    height: 80px;
+    background-color: #111;
+    border-radius: 50px;
+    box-shadow: inset -4px 2px 0 0 #f0dcdc;
+    -webkit-animation: headAnim 1.5s infinite alternate;
+    -webkit-animation-timing-function: ease-out
+}
+
+.body {
+    position: relative;
+    margin: 90px auto;
+    width: 140px;
+    height: 120px;
+    background-color: #111;
+    border-radius: 50px/25px;
+    box-shadow: inset -5px 2px 0 0 #f0dcdc;
+    -webkit-animation: bodyAnim 1.5s infinite alternate;
+    -webkit-animation-timing-function: ease-out
+}
+
+@-webkit-keyframes headAnim {
+    0% {
+        top: 0
+    }
+
+    50% {
+        top: 10px
+    }
+
+    100% {
+        top: 0
+    }
+}
+
+@-webkit-keyframes bodyAnim {
+    0% {
+        top: -5px
+    }
+
+    50% {
+        top: 10px
+    }
+
+    100% {
+        top: -5px
+    }
+}
+
+.circ {
+    -webkit-backface-visibility: hidden;
+    margin: 60px auto;
+    width: 180px;
+    height: 180px;
+    background-color: #111;
+    border-radius: 0 0 50px 50px;
+    position: relative;
+    z-index: -1;
+    left: 0; 
+    overflow: hidden
+}
+
+.hands {
+    -webkit-backface-visibility: hidden;
+    margin-top: 140px;
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    background-color: #111;
+    border-radius: 20px;
+    box-shadow: -1px -4px 0 0 #f0dcdc;
+    -webkit-transform: rotate(45deg);
+    top: 75%;
+    left: 16%;
+    z-index: 1;
+    -webkit-animation: bodyAnim 1.5s infinite alternate;
+    -webkit-animation-timing-function: ease-out
+}
+
+.load {
+    position: absolute;
+    width: 7ch;
+    height: 32px;
+    text-align: left;
+    line-height: 32px;
+    margin: -10px auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Julius Sans One',sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: #f0dcdc;
+    left: 10%;
+    top: 10%;
+    -webkit-animation: fontAnim 3.75s infinite;
+    -webkit-animation-timing-function: ease-out;
+    word-wrap: break-word;
+    display: block;
+    overflow: hidden
+}
+
+@-webkit-keyframes fontAnim {
+    0% {
+        width: 7ch
+    }
+
+    16% {
+        width: 8ch
+    }
+
+    32% {
+        width: 9ch
+    }
+
+    48% {
+        width: 10ch
+    }
+
+    64% {
+        width: 11ch
+    }
+
+    80% {
+        width: 12ch
+    }
+
+    100% {
+        width: 13ch
+    }
+}
+
+
+
+
+.blockPasswordAndLogin {
+    border: 1px solid #bdbdbd;
+}
+
+.empty_field {
+    border-width: 3px;
+    border-color: Crimson;
+}
+
+.emptyLoginOrPassword {
+    border: 3px solid Crimson;
+}
+
+.popup {
+    background: rgba(100, 100, 100, 0.6);
+    position: fixed;
+    display: none;
+    z-index: 9999;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+
+.wrapper {
+    max-width: 600px;
+    width: 70%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    background: #FFFFFF;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 0px rgba(#000000, 0.4);
+}
+
+
+.modalWindowButton {
+    background: blue;
+    border: 0;
+    border-radius: 8px;
+    font-size: 18px;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-top: 2%;
+    margin-left: 40%;
+    width: 100px;
+    height: 40px;
+
+}
+
+.pageNumber {
+    text-decoration: none !important;
+    width: 400px;
+    height: 400px;
+    display: contents;
+}
+
+.disableLink {
+    pointer-events: none;
+}
+
+.buttonLogin {
+    margin-left: 112px;
+    font-family: Trebuchet MS;
+    font-size: 22px;
+    background-color: SkyBlue;
+    color: black;
+    border-radius: 4px;
+    border: 2px solid black;
+    width: 100px;
+    height: 38px;
+    transition: 0.3s;
+}
+
+    .buttonLogin:hover {
+        margin-left: 112px;
+        font-family: Trebuchet MS;
+        font-size: 22px;
+        background-color: #696969;
+        color: white;
+        border-radius: 4px;
+        border: 2px solid black;
+        width: 100px;
+        height: 38px;
+        transition: 0.3s;
+    }
+
+    .buttonLogin:active {      
+        margin-top: 3px;
+    }
+
+
+
+
+
+
+.pageStyle {
+    transition: 0.3s;
+    background-color: white;
+    border-color: white;    
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 100%;
+    font-size: 20px;
+    font-family: Trebuchet MS;
+    text-decoration: none !important;
+}
+
+.pageStyle:hover {
+    background-color: DimGrey;
+    color: white;
+    transition: 0.3s;
+}
+
+.blockPages {
+    padding-top: 13px;
+    margin-top: 10px;
+    padding-left: 1.4%;
+    background-color: #F0F8FF;
+    height: 65px;
+    margin-left: 1%;
+    margin-right: 1%;
+    padding-left: 1%;
+    border-radius: 16px;
+    font-family: Trebuchet MS;
+}
+
+.pageLabel {
+    font-size: 20px;
+    font-family: Trebuchet MS;
+}
+
+.styleNextButton {
+    transition: 0.3s;
+    height: 40px;
+    width: 210px;
+    border: none;
+    border-radius: 16px;
+    background: none;
+    font-size: 20px;
+    font-family: Trebuchet MS;
+    background-color: white;
+    border-color: white;
+    margin-right: 20px;
+}
+
+.styleNextButton:hover {
+    background-color: DimGrey;
+    color: white;
+    transition: 0.3s;
+}
+
+.styleStartButton {
+    transition: 0.3s;
+    height: 40px;
+    width: 150px;
+    border: none;
+    border-radius: 16px;
+    background: none;
+    font-size: 20px;
+    font-family: Trebuchet MS;
+    background-color: white;
+    border-color: white;
+}
+
+.styleStartButton:hover {
+    background-color: DimGrey;
+    color: white;
+    transition: 0.3s;
+}
+
+.blockAuthorization {
+    background-color: aqua;
+    padding-top: 20px;
+    padding-left: 23.5px;
+    margin-top: 300px;
+    margin-right: 830px;
+    margin-left: 830px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+}
+
+
+
+#message a {
+    display: block;
+    display: none;
+    z-index: 999;
+    position: fixed;
+    opacity: .65;
+    top: 91%;
+    text-decoration: none;
+    margin-left: 92%;
+    -moz-border-radius: 24px;
+    -webkit-border-radius: 24px;
+    width: 120px;
+    height: 48px;
+    padding: 4px;
+    background-color: #000;
+    font-size: 24px;
+    text-align: center;
+    color: #fff;
+}
+
+#toTop {
+    visibility: hidden;
+    position: fixed;
+    display: inline-block;
+    bottom: 30px;
+    right: -120px;
+    z-index: 1000;
+    cursor: pointer;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+    -moz-border-radius: 24px;
+    -webkit-border-radius: 24px;
+    width: 120px;
+    height: 48px;
+    padding: 4px;
+    background-color: #000;
+    font-size: 24px;
+    text-align: center;
+    color: #fff;
+    opacity: 0.65;
+}
+
+    #toTop:hover {
+        opacity: 1;
+        background: darkgreen;
+        
+    }
+
+    #toTop svg {
+        position: relative;
+        top: 12px;
+        right: -1px;
+        fill: #fff;
+        transition: all .3s ease-in-out;
+    }
+
+    #toTop:hover svg {
+        cursor: pointer;
+        fill: #fff;
+        transition: all .3s ease-in-out;
+        opacity: 1;
+    }
+
+    #toTop.show {
+        opacity: 0.65;
+        visibility: visible;
+        right: calc(2%);
+    }

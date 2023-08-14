@@ -1,0 +1,78 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1920px, initial-scale=1.0" />
+    <title>Audit Trail</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/test.styles.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/rt.ico">
+</head>
+
+
+@model IndexViewModel
+@{/*<div class="preloader">
+          <svg class="preloader__image" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+              d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z">
+            </path>
+          </svg>
+
+
+
+      
+    </div>*/
+    }
+    
+
+
+
+<body style="background-color: white">
+    
+    
+
+    <header class="myform" style="font-family: Impact ">       
+            <center>
+                AUDIT TRAIL
+            </center>                
+    </header>
+
+    
+    
+    <div class="mainblock">
+        <main role="main" class="pg-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="myfooter" style="min-width: 1900px" >
+        <div class="container">
+            <div class="footer__string">
+                <center>
+                    RT - 2023
+                </center>
+            </div>
+        </div>
+    </footer>
+    
+
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+	<script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+    
+</body>
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+</html>

@@ -1,0 +1,174 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div class="preloader">
+
+    <div class="circ">
+        <div class="load">Loading . . . </div>
+        <div class="hands"></div>
+        <div class="body"></div>
+        <div class="head">
+            <div class="eye"></div>
+        </div>
+    </div>
+    <div id="message"><a href="#top">Наверх</a></div>
+
+</div>
+
+<div class="popup" id="myPopupEmpty" aria-hidden="true" onClick="if(event.target == this){closePopupEmpty('#myPopupEmpty');}">
+        <div class="wrapper" aria-labelledby="popupTitle" aria-describedby="popupText" aria-modal="true">
+            <div>
+                <h3 style="font-family: Trebuchet MS;" id="popupTitle">Пустые поля ввода:</h3>
+                <label id="popupTextEmpty" style="margin-top: 15px; margin-bottom: 15px; font-family: Trebuchet MS; font-size: 20px;">Введите логин и пароль.</label>
+            </div>  
+            <button class="modalWindowButton" id="closePopup" onClick="closePopupEmpty('#myPopupEmpty');" aria-label="Close popup">Закрыть</button>
+        </div>
+    </div>
+
+@{
+    if (ViewData["errorLoginOrPassword"] == "error")
+    {
+        <div style="background-color: LightCoral; border: 3px solid Crimson; text-align: center; font-size: 26px; font-family: Trebuchet MS; padding-top: 13px; height:70px; margin-top: 90px; margin-left: 38%; margin-right: 38%;">
+            <label>Неправильный логин или пароль.</label>
+        </div>
+        <form asp-controller="Action" asp-action="Authorization" onsubmit="return emptyFieldsLoginOrPassword();">
+
+            <div style="border-radius:30px; font-size: 20px; font-family: Trebuchet MS; padding-top: 5px; margin-top: 40px; padding-left:30px; padding-right: 30px; margin-left: 40%; margin-right: 40%; height:340px; background-color: #F0F8FF">
+                <h1 style="margin-left: 55px; margin-bottom: 35px;">Авторизация</h1>
+
+                <form class="my-form">
+                    <div class="form-group">
+                        <label for="email">Введите логин:</label>
+                        <input style="font-size:18px; width: 325px; padding-left: 8px; height:35px; border-radius: 4px; border: 3px solid Crimson;" value="@ViewData["login"]" name="login" id="login" type="text" placeholder="Логин" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Введите пароль:</label>
+                        <div class="input-group">
+                            <input style="font-size:18px; width: 285px; padding-left: 8px; border: 3px solid Crimson; height:35px; border-bottom-left-radius: 4px; border-top-left-radius: 4px;" name="password" id="password" type="password" placeholder="Пароль" />
+                            <div class="input-group-addon" id="s-h-pass"><span class="glyphicon glyphicon-eye-open" title="Показать пароль"></span></div>
+                        </div>
+                    </div>
+                    <div style="padding-right: 128px; margin-top: 30px;">
+                        <input id="enter" type="submit" value="Вход" class="buttonLogin" />
+                    </div>
+                </form>
+
+            </div>
+        </form>
+    }
+    /*else if (ViewData["emptyFields"] == "void" && ViewData["quantity"] != "1")
+    {
+        <div style="background-color: LightCoral; border: 3px solid Crimson; text-align: center; font-size: 26px; font-family: Trebuchet MS; padding-top: 13px; height:70px; margin-top: 90px; margin-left: 38%; margin-right: 38%;">
+            <label>Введите логин и пароль.</label>
+        </div>
+        <form asp-controller="Action" asp-action="Authorization">
+
+            <div style="border-radius:30px; font-size: 20px; font-family: Trebuchet MS; padding-top: 5px; margin-top: 40px; padding-left:30px; padding-right: 30px; margin-left: 40%; margin-right: 40%; height:340px; background-color: #F0F8FF">
+                <h1 style="margin-left: 55px; margin-bottom: 35px;">Авторизация</h1>
+
+                <form class="my-form">
+                    <div class="form-group">
+                        <label for="email">Введите логин:</label>
+                        <input style="font-size:18px; width: 325px; padding-left: 8px; height:35px; border-radius: 4px; border: 3px solid Crimson;" value="@ViewData["login"]" name="login" id="login" type="text" placeholder="Логин" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Введите пароль:</label>
+                        <div class="input-group">
+                            <input style="font-size:18px; width: 285px; padding-left: 8px; border: 3px solid Crimson; height:35px; border-bottom-left-radius: 4px; border-top-left-radius: 4px;" name="password" id="password" type="password" placeholder="Пароль" />
+                            <div class="input-group-addon" id="s-h-pass"><span class="glyphicon glyphicon-eye-open" title="Показать пароль"></span></div>
+                        </div>
+                    </div>
+                    <div style="padding-right: 128px; margin-top: 30px;">
+                        <input id="enter" type="submit" value="Вход" class="buttonLogin" />
+                    </div>
+                </form>
+
+            </div>
+        </form>
+    }*/
+    else
+    {
+        <form asp-controller="Action" asp-action="Authorization" onsubmit="return emptyFieldsLoginOrPassword();">
+
+            <div style="border-radius:30px; font-size: 20px; font-family: Trebuchet MS; padding-top: 5px; margin-top: 200px; padding-left:30px; padding-right: 30px; margin-left: 40%; margin-right: 40%; height:340px; background-color: #F0F8FF">
+                <h1 style="margin-left: 55px; margin-bottom: 35px;">Авторизация</h1>
+
+                <form class="my-form">
+                    <div class="form-group">
+                        <label for="email">Введите логин:</label>
+                        <input class="blockPasswordAndLogin" style="font-size:18px; width: 325px; padding-left: 8px; height:35px; border-radius: 4px;" name="login" id="login" type="text" placeholder="Логин" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Введите пароль:</label>
+                        <div class="input-group">
+                            <input class="blockPasswordAndLogin" style="font-size:18px; width: 285px; padding-left: 8px; height:35px; border-bottom-left-radius: 4px; border-top-left-radius: 4px;" name="password" id="password" type="password" placeholder="Пароль" />
+                            <div class="input-group-addon" id="s-h-pass"><span class="glyphicon glyphicon-eye-open" title="Показать пароль"></span></div>
+                        </div>
+                    </div>
+                    <div style="padding-right: 128px; margin-top: 30px;">
+                        <input id="enter" type="submit" value="Вход" class="buttonLogin" />
+                    </div>
+                </form>
+
+            </div>
+        </form>
+    }
+}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <script>
+        $( document ).ready(function() {
+            $('#s-h-pass').click(function(){
+                var type = $('#password').attr('type') == "text" ? "password" : 'text',
+                    c = $(this).html() == "<span class=\"glyphicon glyphicon-eye-close\" title=\"Скрыть пароль\"></span>" ? "<span class=\"glyphicon glyphicon-eye-open\" title=\"Показать пароль\"></span>" : "<span class=\"glyphicon glyphicon-eye-close\" title=\"Скрыть пароль\"></span>";
+                $(this).html(c);
+                $('#password').prop('type', type);
+            });
+        });
+    </script>
+
+    <script>
+        window.addEventListener('load', () => {
+            /* Страница загружена, включая все ресурсы */
+            const preloader = document.querySelector('.preloader') /* находим блок Preloader */
+            preloader.classList.add('preloader_hidden') /* добавляем ему класс для скрытия */
+        })
+    </script>
+
+
+    <script>
+
+        function emptyFieldsLoginOrPassword() {
+            var login = document.getElementById("login").value;
+            var password = document.getElementById("password").value;
+            if (login == "" || password == "") {
+                document.getElementById("login").classList.add("emptyLoginOrPassword");
+                document.getElementById("password").classList.add("emptyLoginOrPassword");
+                openPopupEmpty('#myPopupEmpty');
+                return false;
+            }
+        }
+
+
+        function openPopupEmpty(popup) {
+            $(popup).show().attr("aria-hidden", "false");
+            var errorSearchString = 'Введите логин и пароль.';
+            document.getElementById("popupTextEmpty").innerText = errorSearchString;
+            $("#closePopupEmpty").focus();
+        }
+
+        function closePopupEmpty(popup) {
+            $(popup).hide().attr("aria-hidden", "true");
+            $("#openMyPopupEmpty").focus();
+        }
+  
+    </script>
+  
